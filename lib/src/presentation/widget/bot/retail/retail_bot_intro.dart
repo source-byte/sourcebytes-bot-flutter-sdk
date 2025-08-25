@@ -60,18 +60,30 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         if (provider.logo != null) ...[
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: CachedNetworkImage(
-                              imageUrl: provider.logo!,
-                              errorWidget: (context, url, error) =>
-                                  const SizedBox(),
-                              placeholder: (context, url) => SizedBox(),
-                              width: 35,
-                              height: 35,
-                              fit: BoxFit.cover,
+                          if (provider.logo!.contains('http'))
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: CachedNetworkImage(
+                                imageUrl: provider.logo!,
+                                errorWidget: (context, url, error) =>
+                                    const SizedBox(),
+                                placeholder: (context, url) => SizedBox(),
+                                width: 35,
+                                height: 35,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          else
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                provider.logo!,
+                                width: 35,
+                                height: 35,
+                                fit: BoxFit.cover,
+                                package: 'sourcebytes_bot_sdk',
+                              ),
                             ),
-                          ),
                           BrandVSpace.gap10(),
                         ],
                         BrandText(

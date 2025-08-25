@@ -6,8 +6,10 @@ import 'dart:convert';
 
 import 'package:sourcebytes_bot_sdk/core/model/bot/request/send_message/send_message_request_model.dart';
 import 'package:sourcebytes_bot_sdk/core/model/bot/response/chat/chat_response_model.dart';
+import 'package:sourcebytes_bot_sdk/core/model/bot/response/chat_history/chat_history_response_model.dart';
 import 'package:sourcebytes_bot_sdk/core/network/endpoint/bot_endpoint.dart';
 import 'package:sourcebytes_bot_sdk/core/network/network.dart';
+import 'package:sourcebytes_bot_sdk/util/chat/chat_manager.dart';
 import 'package:sourcebytes_bot_sdk/util/enum/role_type_enum.dart';
 
 abstract class WebSocketManager {
@@ -69,6 +71,39 @@ abstract class WebSocketManager {
           from: Participant(id: null, role: RoleTypeEnum.bot.name),
           message: 'Something went wrong...',
           timestamp: DateTime.now(),
+          to: Participant(id: RoleTypeEnum.user.name),
+        ),
+      );
+    }
+  }
+
+  static Future<void> addChatHistory(ChatHistoryResponseModel model) async {
+    if (model.messages == null) return;
+    for (var i in model.messages!) {
+      ChatManager().addChat(
+        chat: ChatResponseModel(
+          from: Participant(
+            id: i.id,
+            role: i.messageAuthorType == RoleTypeEnum.user.name
+                ? RoleTypeEnum.user.name
+                : RoleTypeEnum.bot.name,
+          ),
+          message: i.message,
+          timestamp: i.createdAt,
+          to: Participant(id: RoleTypeEnum.user.name),
+        ),
+      );
+
+      _chatController.add(
+        ChatResponseModel(
+          from: Participant(
+            id: i.id,
+            role: i.messageAuthorType == RoleTypeEnum.user.name
+                ? RoleTypeEnum.user.name
+                : RoleTypeEnum.bot.name,
+          ),
+          message: i.message,
+          timestamp: i.createdAt,
           to: Participant(id: RoleTypeEnum.user.name),
         ),
       );

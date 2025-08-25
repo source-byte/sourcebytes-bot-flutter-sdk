@@ -1,8 +1,8 @@
 name: sourcebytes_bot_sdk
 description: "An Indo-sakura chatbot package from source byte to train your AI model and seamlessly give you a polished output."
 version: 0.0.1
-homepage: https://github.com/source-byte/source-byte-bot-flutter-sdk
-repository: https://github.com/source-byte/source-byte-bot-flutter-sdk
+homepage: https://github.com/source-byte/sourcebytes-bot-flutter-sdk
+repository: https://github.com/source-byte/sourcebytes-bot-flutter-sdk
 
 environment:
   sdk: ^3.8.1

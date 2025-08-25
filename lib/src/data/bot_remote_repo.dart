@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:riverpod/riverpod.dart';
 import 'package:sourcebytes_bot_sdk/core/model/base/base_dynamic_response_model.dart';
 import 'package:sourcebytes_bot_sdk/core/model/bot/request/init/init_request_model.dart';
+import 'package:sourcebytes_bot_sdk/core/model/bot/response/chat_history/chat_history_response_model.dart';
 import 'package:sourcebytes_bot_sdk/core/model/bot/response/init/init_response_model.dart';
 import 'package:sourcebytes_bot_sdk/core/model/bot/response/login/login_response_model.dart';
 import 'package:sourcebytes_bot_sdk/core/network/endpoint/bot_endpoint.dart';
@@ -72,6 +73,34 @@ class BotRemoteRepo implements BotRepo {
     } catch (e) {
       return BaseDynamicResponse.error();
     }
+  }
+
+  @override
+  Future<BaseDynamicResponse<ChatHistoryResponseModel?>> getHistory({
+    required String botId,
+    required String userId,
+    required String sessionId,
+  }) async {
+    try {
+      var response = await NetworkClient.get(
+        endPoint:
+            '${BotEndpoint.conversation}$botId/?userId=$userId&session_id=$sessionId',
+      );
+
+      if (response?.statusCode == NetworkStatus.status200.statusCode) {
+        var body = json.decode(response!.body);
+        var result = BaseDynamicResponse<ChatHistoryResponseModel?>.fromJson(
+          body,
+
+          (json) =>
+              ChatHistoryResponseModel.fromJson(json as Map<String, dynamic>),
+        );
+        return result;
+      }
+    } catch (e) {
+      return BaseDynamicResponse.error();
+    }
+    return BaseDynamicResponse.error();
   }
 }
 

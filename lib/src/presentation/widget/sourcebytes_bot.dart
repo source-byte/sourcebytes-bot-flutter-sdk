@@ -110,14 +110,18 @@ class _SourceByteState extends ConsumerState<SourceBytes> {
           provider.setShowIntro = false;
           provider.setShowChat = true;
         }
-      } else if (provider.initResponseModel?.botConfig?.authenticationType ==
-          AuthTypeEnum.closed.name) {
+      } else {
         provider.setShowLogin = true;
         if (widget.showWelcomeScreen) {
           provider.setShowIntro = true;
         } else {
           provider.setShowIntro = false;
         }
+      }
+
+      if (widget.userId != null &&
+          provider.initResponseModel!.botConfig?.needsChathistory == true) {
+        await provider.getHistory(userId: widget.userId!, botId: widget.botId);
       }
     }
   }

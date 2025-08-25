@@ -15,7 +15,9 @@ abstract class NetworkClient {
       Uri.parse('$baseUrl$endPoint'),
       headers: {
         "content-type": "application/json",
-        "Authorization": "Token ${AuthManager().token}",
+        "Authorization": AuthManager().token == null
+            ? ''
+            : "Token ${AuthManager().token}",
       },
     );
     debugPrint(

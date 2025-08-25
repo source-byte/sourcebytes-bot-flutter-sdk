@@ -31,7 +31,7 @@ class ProfileAvatar extends StatelessWidget {
                 ),
               ),
             ),
-          ] else
+          ] else if (imgUrl!.contains('http'))
             SizedBox(
               width: width,
               height: height,
@@ -45,6 +45,14 @@ class ProfileAvatar extends StatelessWidget {
                       const SizedBox(width: 50, height: 50),
                   errorListener: (value) {},
                 ),
+              ),
+            )
+          else
+            SizedBox(
+              width: width,
+              height: height,
+              child: ClipOval(
+                child: Image.asset(imgUrl!, package: 'sourcebytes_bot_sdk'),
               ),
             ),
         ],

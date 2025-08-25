@@ -95,8 +95,11 @@ class _RetailBotChatState extends ConsumerState<RetailBotChat> {
                               isIncoming:
                                   item.from?.role == RoleTypeEnum.bot.name,
                               messages: item.message ?? '--',
+                              // imgUrl: item.from?.role == RoleTypeEnum.bot.name
+                              //     ? provider.initResponseModel?.avatar?.image
+                              //     : '',
                               imgUrl: item.from?.role == RoleTypeEnum.bot.name
-                                  ? provider.initResponseModel?.avatar?.image
+                                  ? (provider.logo)
                                   : '',
                               timeStamp: item.timestamp != null
                                   ? DateFormats.time12A.format(item.timestamp!)

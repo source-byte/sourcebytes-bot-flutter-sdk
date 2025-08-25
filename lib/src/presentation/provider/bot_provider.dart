@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sourcebytes_bot_sdk/core/model/bot/request/init/init_request_model.dart';
 import 'package:sourcebytes_bot_sdk/core/model/bot/request/send_message/send_message_request_model.dart';
+import 'package:sourcebytes_bot_sdk/core/model/bot/response/chat_history/chat_history_response_model.dart';
 import 'package:sourcebytes_bot_sdk/core/model/bot/response/init/init_response_model.dart';
 import 'package:sourcebytes_bot_sdk/core/model/bot/state/bot_state.dart';
 import 'package:sourcebytes_bot_sdk/core/network/network_status.dart';
@@ -13,6 +14,7 @@ import 'package:sourcebytes_bot_sdk/src/data/bot_remote_repo.dart';
 import 'package:sourcebytes_bot_sdk/theme/colors.dart';
 import 'package:sourcebytes_bot_sdk/theme/source_byte_theme.dart';
 import 'package:sourcebytes_bot_sdk/theme/theme_manager.dart';
+import 'package:sourcebytes_bot_sdk/util/assets/assets.dart';
 import 'package:sourcebytes_bot_sdk/util/enum/auth_type_enum.dart';
 import 'package:sourcebytes_bot_sdk/util/enum/theme_mode_enum.dart';
 import 'package:sourcebytes_bot_sdk/util/extension/string_extension.dart';
@@ -56,7 +58,8 @@ class BotNotifierProvider extends StateNotifier<BotState> {
   bool get showFooter =>
       initResponseModel?.botConfig?.isPoweredByEnabled == true;
 
-  String? get logo => initResponseModel?.botConfig?.logo;
+  String? get logo =>
+      initResponseModel?.botConfig?.logo ?? Assets.sourceBytesLogo;
 
   AuthTypeEnum get authType =>
       (initResponseModel?.botConfig?.authenticationType ==
@@ -81,6 +84,10 @@ class BotNotifierProvider extends StateNotifier<BotState> {
   bool get showLogin => state.showLogin;
 
   bool get showIntro => state.showIntro;
+
+  bool get isChatHistory => state.isChatHistory;
+
+  String? get sessionId => state.initResponseModel?.sessionId;
 
   Future<void> initBot({required String botId, String? userId}) async {
     state = state.copyWith(
@@ -167,6 +174,25 @@ class BotNotifierProvider extends StateNotifier<BotState> {
     });
   }
 
+  Future<void> getHistory({
+    required String botId,
+    required String userId,
+  }) async {
+    if (sessionId == null) return;
+    var result = await ref
+        .read(botRemoteRepo)
+        .getHistory(botId: botId, sessionId: sessionId!, userId: userId);
+
+    if (result.success == ActionStatus.success.code) {
+      try {
+        var model = result.data as ChatHistoryResponseModel;
+        await WebSocketManager.addChatHistory(model);
+      } catch (e) {
+        //
+      }
+    }
+  }
+
   set setThemeMode(String? mode) {
     if (mode == ThemeModeEnum.others.name) {
       state = state.copyWith(themeMode: ThemeModeEnum.others);
@@ -203,5 +229,9 @@ class BotNotifierProvider extends StateNotifier<BotState> {
 
   set setShowIntro(bool value) {
     state = state.copyWith(showIntro: value);
+  }
+
+  set setIsChatHistory(bool value) {
+    state = state.copyWith(isChatHistory: value);
   }
 }

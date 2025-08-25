@@ -23,5 +23,6 @@ class BotState with _$BotState {
     @Default(false) bool showChat,
     @Default(false) bool showLogin,
     @Default(false) bool showIntro,
+    @Default(false) bool isChatHistory,
   }) = _BotState;
 }
