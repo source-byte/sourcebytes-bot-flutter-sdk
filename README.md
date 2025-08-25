@@ -23,5 +23,5 @@ Supports both **iOS** and **Android**.
 Add the dependency to your `pubspec.yaml`:
 ```yaml
 dependencies:
-  sourcebytes_bot_sdk: ^0.0.1
+  sourcebytes_bot_sdk: ^0.0.2
   
