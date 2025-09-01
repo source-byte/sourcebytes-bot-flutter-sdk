@@ -19,6 +19,8 @@ class RetailBotIntro extends ConsumerStatefulWidget {
     required this.width,
     required this.height,
     this.chatOnTap,
+    this.showBackButton = true,
+    this.backOnTap,
   });
 
   final double width;
@@ -26,6 +28,10 @@ class RetailBotIntro extends ConsumerStatefulWidget {
   final double height;
 
   final Function? chatOnTap;
+
+  final bool showBackButton;
+
+  final Function? backOnTap;
 
   @override
   ConsumerState<RetailBotIntro> createState() => _RetailBotIntroState();
@@ -57,47 +63,70 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        if (provider.logo != null) ...[
-                          if (provider.logo!.contains('http'))
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: CachedNetworkImage(
-                                imageUrl: provider.logo!,
-                                errorWidget: (context, url, error) =>
-                                    const SizedBox(),
-                                placeholder: (context, url) => SizedBox(),
-                                width: 35,
-                                height: 35,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          else
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.asset(
-                                provider.logo!,
-                                width: 35,
-                                height: 35,
-                                fit: BoxFit.cover,
-                                package: 'sourcebytes_bot_sdk',
-                              ),
+                        BrandVSpace.gap60(),
+                        if (widget.showBackButton)
+                          InkWell(
+                            onTap: () {
+                              widget.backOnTap?.call();
+                            },
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.arrow_back_rounded,
+                                  color: AppColors.white,
+                                  size: 28,
+                                ),
+                                BrandVSpace.gap26(),
+                              ],
                             ),
-                          BrandVSpace.gap10(),
-                        ],
-                        BrandText(
-                          provider.title,
-                          color: Color(provider.textColor),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        BrandVSpace.gap10(),
-                        BrandText(
-                          provider.subTitle,
-                          color: Color(provider.textColor),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (provider.logo != null) ...[
+                              if (provider.logo!.contains('http'))
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: CachedNetworkImage(
+                                    imageUrl: provider.logo!,
+                                    errorWidget: (context, url, error) =>
+                                        const SizedBox(),
+                                    placeholder: (context, url) => SizedBox(),
+                                    width: 35,
+                                    height: 35,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              else
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.asset(
+                                    provider.logo!,
+                                    width: 35,
+                                    height: 35,
+                                    fit: BoxFit.cover,
+                                    package: 'sourcebytes_bot_sdk',
+                                  ),
+                                ),
+                              BrandVSpace.gap10(),
+                            ],
+                            BrandText(
+                              provider.title,
+                              color: Color(provider.textColor),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            BrandVSpace.gap10(),
+                            BrandText(
+                              provider.subTitle,
+                              color: Color(provider.textColor),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
                         ),
                       ],
                     ),

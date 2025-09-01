@@ -15,8 +15,9 @@ class RetailBotLogin extends ConsumerStatefulWidget {
   final double width;
   final double height;
   final TextEditingController? emailController, passwordControlled;
-  final Function? sendOnTap;
+  final Function? sendOnTap, backOnTap;
   final String? errorMessage;
+  final bool showBackButton;
   const RetailBotLogin({
     super.key,
     required this.width,
@@ -25,6 +26,8 @@ class RetailBotLogin extends ConsumerStatefulWidget {
     this.passwordControlled,
     this.sendOnTap,
     this.errorMessage,
+    this.backOnTap,
+    this.showBackButton = true,
   });
   @override
   ConsumerState<RetailBotLogin> createState() => _RetailBotLoginState();
@@ -47,6 +50,8 @@ class _RetailBotLoginState extends ConsumerState<RetailBotLogin> {
               title: provider.title,
               subTitle: provider.subTitle,
               logo: provider.logo,
+              showBackButton: widget.showBackButton,
+              backOnTap: widget.backOnTap,
             ),
             Spacer(),
             Padding(

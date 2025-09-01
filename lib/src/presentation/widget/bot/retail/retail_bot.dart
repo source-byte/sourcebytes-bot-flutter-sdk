@@ -17,10 +17,11 @@ class RetailBot extends ConsumerStatefulWidget {
   final TextEditingController? emailController,
       passwordControlled,
       chatController;
-  final Function? loginOnTap;
+  final Function? loginOnTap, backOnTap;
   final Function(String)? onSend;
   final FocusNode? chatFocusNode;
   final ScrollController? scrollController;
+  final bool showBackButton;
   const RetailBot({
     super.key,
     this.width,
@@ -32,6 +33,8 @@ class RetailBot extends ConsumerStatefulWidget {
     this.chatFocusNode,
     this.onSend,
     this.scrollController,
+    this.showBackButton = true,
+    this.backOnTap,
   });
 
   @override
@@ -56,6 +59,8 @@ class _RetailBotState extends ConsumerState<RetailBot> {
           RetailBotIntro(
             width: width,
             height: height,
+            showBackButton: widget.showBackButton,
+            backOnTap: widget.backOnTap,
             chatOnTap: () {
               provider.setShowIntro = false;
               if (provider.authType == AuthTypeEnum.open) {
@@ -73,6 +78,8 @@ class _RetailBotState extends ConsumerState<RetailBot> {
             passwordControlled: widget.passwordControlled,
             sendOnTap: widget.loginOnTap,
             errorMessage: provider.loginErrorMessage,
+            backOnTap: widget.backOnTap,
+            showBackButton: widget.showBackButton,
           )
         else if (provider.showChat)
           RetailBotChat(
@@ -82,6 +89,8 @@ class _RetailBotState extends ConsumerState<RetailBot> {
             chatFocusNode: widget.chatFocusNode,
             onSend: widget.onSend,
             scrollController: widget.scrollController,
+            backOnTap: widget.backOnTap,
+            showBackButton: widget.showBackButton,
           ),
       ],
     );

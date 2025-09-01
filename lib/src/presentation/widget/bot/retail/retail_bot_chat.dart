@@ -24,6 +24,8 @@ class RetailBotChat extends ConsumerStatefulWidget {
   final Function(String)? onSend;
   final FocusNode? chatFocusNode;
   final ScrollController? scrollController;
+  final bool showBackButton;
+  final Function? backOnTap;
   const RetailBotChat({
     super.key,
     required this.width,
@@ -32,6 +34,8 @@ class RetailBotChat extends ConsumerStatefulWidget {
     this.onSend,
     this.chatFocusNode,
     this.scrollController,
+    this.backOnTap,
+    this.showBackButton = true,
   });
 
   @override
@@ -79,6 +83,8 @@ class _RetailBotChatState extends ConsumerState<RetailBotChat> {
                     title: provider.title,
                     subTitle: provider.subTitle,
                     logo: provider.logo,
+                    backOnTap: widget.backOnTap,
+                    showBackButton: widget.showBackButton,
                   ),
                   Expanded(
                     child: StreamBuilder(

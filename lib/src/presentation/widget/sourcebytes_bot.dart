@@ -26,7 +26,8 @@ class SourceBytes extends ConsumerStatefulWidget {
   final Function(String email, String password)? onLogin;
   final Function(String)? sendMessageOnTap;
   final Function(String?)? onBotMessage;
-  final bool showWelcomeScreen;
+  final Function? backOnTap;
+  final bool showWelcomeScreen, showBackButton;
   const SourceBytes({
     super.key,
     this.userId,
@@ -38,6 +39,8 @@ class SourceBytes extends ConsumerStatefulWidget {
     this.onBotMessage,
     this.sendMessageOnTap,
     this.showWelcomeScreen = true,
+    this.showBackButton = true,
+    this.backOnTap,
   });
 
   @override
@@ -139,6 +142,8 @@ class _SourceByteState extends ConsumerState<SourceBytes> {
           chatFocusNode: chatFocusNode,
           onSend: onChatSend,
           scrollController: scrollController,
+          showBackButton: widget.showBackButton,
+          backOnTap: widget.backOnTap,
         );
 
       case ThemeModeEnum.healthCare:
@@ -155,6 +160,8 @@ class _SourceByteState extends ConsumerState<SourceBytes> {
           chatFocusNode: chatFocusNode,
           onSend: onChatSend,
           scrollController: scrollController,
+          showBackButton: widget.showBackButton,
+          backOnTap: widget.backOnTap,
         );
 
       default:
@@ -168,6 +175,8 @@ class _SourceByteState extends ConsumerState<SourceBytes> {
           chatFocusNode: chatFocusNode,
           onSend: onChatSend,
           scrollController: scrollController,
+          showBackButton: widget.showBackButton,
+          backOnTap: widget.backOnTap,
         );
     }
   }

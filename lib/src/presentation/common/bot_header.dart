@@ -11,11 +11,15 @@ import 'package:sourcebytes_bot_sdk/theme/colors.dart';
 class BotHeader extends StatelessWidget {
   final String title, subTitle;
   final String? logo;
+  final bool showBackButton;
+  final Function? backOnTap;
   const BotHeader({
     super.key,
     required this.title,
     required this.subTitle,
     this.logo,
+    this.showBackButton = true,
+    this.backOnTap,
   });
 
   @override
@@ -24,9 +28,25 @@ class BotHeader extends StatelessWidget {
       children: [
         BrandVSpace.gap60(),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: [
+              if (showBackButton)
+                InkWell(
+                  onTap: () {
+                    backOnTap?.call();
+                  },
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.arrow_back_rounded,
+                        color: AppColors.black,
+                        size: 28,
+                      ),
+                    ],
+                  ),
+                ),
+              BrandHSpace.gap10(),
               if (logo != null) ...[
                 if (logo!.contains('http'))
                   ClipRRect(
@@ -66,7 +86,7 @@ class BotHeader extends StatelessWidget {
                     BrandText(
                       subTitle,
                       color: AppColors.black.withAlpha(200),
-                      fontSize: 14,
+                      fontSize: 12,
                     ),
                   ],
                 ),
