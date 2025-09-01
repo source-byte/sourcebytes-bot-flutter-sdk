@@ -5,3 +5,7 @@ You can pass the required ID to use this chatbot. SourceBytes chatbot will be cu
 ## 0.0.2
 
 This update has added chat history
+
+## 0.0.3
+
+Added back button option
