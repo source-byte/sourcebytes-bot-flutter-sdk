@@ -33,6 +33,7 @@ class QuestionTileWidget extends StatelessWidget {
                   message ?? 'hi',
                   color: AppColors.black,
                   maxLines: 3,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Icon(Icons.keyboard_arrow_right_rounded, color: AppColors.black),

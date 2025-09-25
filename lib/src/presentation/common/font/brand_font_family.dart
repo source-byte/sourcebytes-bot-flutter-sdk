@@ -5,4 +5,5 @@ library;
 
 abstract class BrandFontFamily {
   static const String gilroy = 'Gilroy';
+  static const String gilroyBold = 'Gilroy-Bold';
 }

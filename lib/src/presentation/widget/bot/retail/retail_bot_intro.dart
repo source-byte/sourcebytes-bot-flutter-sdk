@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sourcebytes_bot_sdk/src/presentation/common/brand_text.dart';
 import 'package:sourcebytes_bot_sdk/src/presentation/common/brand_vertical_space.dart';
 import 'package:sourcebytes_bot_sdk/src/presentation/common/chat_with_us_widget.dart';
+import 'package:sourcebytes_bot_sdk/src/presentation/common/font/brand_font_family.dart';
 import 'package:sourcebytes_bot_sdk/src/presentation/common/footer_widget.dart';
 import 'package:sourcebytes_bot_sdk/src/presentation/common/question_tile_widget.dart';
 import 'package:sourcebytes_bot_sdk/src/presentation/provider/bot_provider.dart';
@@ -43,173 +44,185 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
   Widget build(BuildContext context) {
     ref.watch(botProvider);
     provider = ref.read(botProvider.notifier);
-    return SizedBox(
-      width: widget.width,
-      height: widget.height,
-      child: Column(
-        children: [
-          SizedBox(
-            width: widget.width,
-            height: widget.height / 2,
-            child: Stack(
-              children: [
-                Container(
-                  width: widget.width,
-                  height: (widget.height / 2) - 55,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        BrandVSpace.gap60(),
-                        if (widget.showBackButton)
-                          InkWell(
-                            onTap: () {
-                              widget.backOnTap?.call();
-                            },
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Icons.arrow_back_rounded,
-                                  color: AppColors.white,
-                                  size: 28,
-                                ),
-                                BrandVSpace.gap26(),
-                              ],
-                            ),
-                          ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            if (provider.logo != null) ...[
-                              if (provider.logo!.contains('http'))
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: CachedNetworkImage(
-                                    imageUrl: provider.logo!,
-                                    errorWidget: (context, url, error) =>
-                                        const SizedBox(),
-                                    placeholder: (context, url) => SizedBox(),
-                                    width: 35,
-                                    height: 35,
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              else
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.asset(
-                                    provider.logo!,
-                                    width: 35,
-                                    height: 35,
-                                    fit: BoxFit.cover,
-                                    package: 'sourcebytes_bot_sdk',
-                                  ),
-                                ),
-                              BrandVSpace.gap10(),
-                            ],
-                            BrandText(
-                              provider.title,
-                              color: Color(provider.textColor),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            BrandVSpace.gap10(),
-                            BrandText(
-                              provider.subTitle,
-                              color: Color(provider.textColor),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ],
-                        ),
-                      ],
+    return SafeArea(
+      child: SizedBox(
+        width: widget.width,
+        height:
+            widget.height -
+            MediaQuery.of(context).padding.bottom -
+            MediaQuery.of(context).padding.top,
+        child: Column(
+          children: [
+            SizedBox(
+              width: widget.width,
+              height: widget.height / 2,
+              child: Stack(
+                children: [
+                  Container(
+                    width: widget.width,
+                    height: (widget.height / 2) - 55,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.vertical(
+                        // top: Radius.circular(20),
+                      ),
                     ),
-                  ),
-                ),
-                if (provider.isBgImageEnable)
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    child: Opacity(
-                      opacity: 0.08,
-                      child: SizedBox(
-                        width: widget.width,
-                        height: (widget.height / 2) - 55,
-                        child: CachedNetworkImage(
-                          imageUrl: provider.bgImage,
-                          fit: BoxFit.cover,
-                          placeholder: (contect, _) => SizedBox(),
-                          errorWidget: (context, url, error) => SizedBox(),
-                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          BrandVSpace.gap20(),
+                          if (widget.showBackButton)
+                            InkWell(
+                              onTap: () {
+                                widget.backOnTap?.call();
+                              },
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.arrow_back_rounded,
+                                    color: AppColors.white,
+                                    size: 28,
+                                  ),
+                                  BrandVSpace.gap26(),
+                                ],
+                              ),
+                            ),
+                          BrandVSpace.gap20(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (provider.logo != null) ...[
+                                if (provider.logo!.contains('http'))
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: CachedNetworkImage(
+                                      imageUrl: provider.logo!,
+                                      errorWidget: (context, url, error) =>
+                                          const SizedBox(),
+                                      placeholder: (context, url) => SizedBox(),
+                                      width: 35,
+                                      height: 35,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                else
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.asset(
+                                      provider.logo!,
+                                      width: 35,
+                                      height: 35,
+                                      fit: BoxFit.cover,
+                                      package: 'sourcebytes_bot_sdk',
+                                    ),
+                                  ),
+                                BrandVSpace.gap10(),
+                              ],
+                              BrandText(
+                                provider.title,
+                                color: Color(provider.textColor),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: BrandFontFamily.gilroyBold,
+                              ),
+                              BrandVSpace.gap10(),
+                              BrandText(
+                                provider.subTitle,
+                                color: Color(provider.textColor),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                Positioned(
-                  top: (widget.height / 2) - 90,
-                  left: 26,
-                  right: 26,
-                  child: ChatWithUsWidget(
-                    buttonLabel:
-                        provider.initResponseModel?.botConfig?.buttonLabel,
-                    buttonMessage:
-                        provider.initResponseModel?.botConfig?.buttonMessage,
-                    onTap: () {
-                      widget.chatOnTap?.call();
+                  if (provider.isBgImageEnable)
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      child: Opacity(
+                        opacity: 0.08,
+                        child: SizedBox(
+                          width: widget.width,
+                          height: (widget.height / 2) - 55,
+                          child: CachedNetworkImage(
+                            imageUrl: provider.bgImage,
+                            fit: BoxFit.cover,
+                            placeholder: (contect, _) => SizedBox(),
+                            errorWidget: (context, url, error) => SizedBox(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  Positioned(
+                    top: (widget.height / 2) - 90,
+                    left: 26,
+                    right: 26,
+                    child: ChatWithUsWidget(
+                      buttonLabel:
+                          provider.initResponseModel?.botConfig?.buttonLabel,
+                      buttonMessage:
+                          provider.initResponseModel?.botConfig?.buttonMessage,
+                      onTap: () {
+                        widget.chatOnTap?.call();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (provider.initResponseModel?.conversationStarters != null) ...[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    itemCount: provider
+                        .initResponseModel
+                        ?.conversationStarters!
+                        .length,
+                    itemBuilder: (context, index) {
+                      var item = provider
+                          .initResponseModel
+                          ?.conversationStarters![index];
+                      if (item?.isActive == true) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: QuestionTileWidget(
+                            message: item?.message,
+                            onTap: () {
+                              provider.setShowIntro = false;
+                              if (provider.authType == AuthTypeEnum.open) {
+                                provider.setShowChat = true;
+                              } else {
+                                provider.setShowLogin = true;
+                              }
+                            },
+                          ),
+                        );
+                      } else {
+                        return SizedBox();
+                      }
                     },
                   ),
                 ),
-              ],
-            ),
-          ),
-          if (provider.initResponseModel?.conversationStarters != null) ...[
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemCount:
-                      provider.initResponseModel?.conversationStarters!.length,
-                  itemBuilder: (context, index) {
-                    var item = provider
-                        .initResponseModel
-                        ?.conversationStarters![index];
-                    if (item?.isActive == true) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: QuestionTileWidget(
-                          message: item?.message,
-                          onTap: () {
-                            provider.setShowIntro = false;
-                            if (provider.authType == AuthTypeEnum.open) {
-                              provider.setShowChat = true;
-                            } else {
-                              provider.setShowLogin = true;
-                            }
-                          },
-                        ),
-                      );
-                    } else {
-                      return SizedBox();
-                    }
-                  },
-                ),
               ),
-            ),
-          ],
+            ],
 
-          if (provider.showFooter) ...[
-            Divider(color: AppColors.greyF6),
-            FooterWidget(logo: provider.logo),
+            if (provider.showFooter) ...[
+              Divider(color: AppColors.greyF6),
+              FooterWidget(logo: provider.logo),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

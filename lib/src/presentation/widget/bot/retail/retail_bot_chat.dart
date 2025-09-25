@@ -73,6 +73,7 @@ class _RetailBotChatState extends ConsumerState<RetailBotChat> {
       height: widget.height,
       width: widget.width,
       child: Scaffold(
+        backgroundColor: AppColors.white,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

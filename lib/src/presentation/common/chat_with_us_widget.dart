@@ -49,11 +49,13 @@ class ChatWithUsWidget extends StatelessWidget {
                   BrandText(
                     color: AppColors.black,
                     buttonLabel ?? 'Chat with us',
+                    fontWeight: FontWeight.w900,
                   ),
                   BrandVSpace.gap10(),
                   BrandText(
                     buttonMessage ?? 'We reply immediatly',
                     color: AppColors.greyB0,
+                    fontWeight: FontWeight.w700,
                   ),
                 ],
               ),
