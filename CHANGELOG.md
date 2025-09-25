@@ -9,3 +9,8 @@ This update has added chat history
 ## 0.0.3
 
 Added back button option
+
+
+## 0.0.4
+
+Updated New UI
