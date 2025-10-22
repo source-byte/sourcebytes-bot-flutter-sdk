@@ -14,3 +14,8 @@ Added back button option
 ## 0.0.4
 
 Updated New UI
+
+
+## 0.0.5
+
+Fixed footer

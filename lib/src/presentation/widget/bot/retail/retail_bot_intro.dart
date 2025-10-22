@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sourcebytes_bot_sdk/src/presentation/common/back_button.dart';
 import 'package:sourcebytes_bot_sdk/src/presentation/common/brand_text.dart';
 import 'package:sourcebytes_bot_sdk/src/presentation/common/brand_vertical_space.dart';
 import 'package:sourcebytes_bot_sdk/src/presentation/common/chat_with_us_widget.dart';
@@ -75,21 +76,7 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                         children: [
                           BrandVSpace.gap20(),
                           if (widget.showBackButton)
-                            InkWell(
-                              onTap: () {
-                                widget.backOnTap?.call();
-                              },
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.arrow_back_rounded,
-                                    color: AppColors.white,
-                                    size: 28,
-                                  ),
-                                  BrandVSpace.gap26(),
-                                ],
-                              ),
-                            ),
+                            BackButtonWidget(backOnTap: widget.backOnTap),
                           BrandVSpace.gap20(),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

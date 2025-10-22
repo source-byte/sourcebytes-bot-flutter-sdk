@@ -144,9 +144,11 @@ class _RetailBotChatState extends ConsumerState<RetailBotChat> {
                     isSendButtonDisabled: provider.isSendMessageLoading,
                   ),
                 ),
-                if (!provider.showFooter) ...[
+                if (provider.showFooter) ...[
                   Divider(color: AppColors.greyF6),
                   FooterWidget(logo: provider.logo),
+                ] else ...[
+                  BrandVSpace.gap16(),
                 ],
               ],
             ),
