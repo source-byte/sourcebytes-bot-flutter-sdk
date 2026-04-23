@@ -6,7 +6,6 @@ library;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sourcebytes_bot_sdk/app_config.dart';
 import 'package:sourcebytes_bot_sdk/core/network/web_scoket/web_socket_manager.dart';

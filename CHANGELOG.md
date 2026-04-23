@@ -19,3 +19,7 @@ Updated New UI
 ## 0.0.5
 
 Fixed footer
+
+## 0.0.6
+
+Fixed footer

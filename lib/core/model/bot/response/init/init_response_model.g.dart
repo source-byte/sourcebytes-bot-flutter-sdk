@@ -108,7 +108,7 @@ _$BotConfigImpl _$$BotConfigImplFromJson(Map<String, dynamic> json) =>
       authenticationType: json['authentication_type'] as String?,
       avatarPosition: json['avatar_position'] as String?,
       language: json['language'] as String?,
-      isPoweredByEnabled: json['is_poweredBy_enabled'] as bool?,
+      whiteLabeling: json['white_labeling'] as bool?,
       needsChathistory: json['needs_chathistory'] as bool?,
     );
 
@@ -135,7 +135,7 @@ Map<String, dynamic> _$$BotConfigImplToJson(_$BotConfigImpl instance) =>
       'authentication_type': instance.authenticationType,
       'avatar_position': instance.avatarPosition,
       'language': instance.language,
-      'is_poweredBy_enabled': instance.isPoweredByEnabled,
+      'white_labeling': instance.whiteLabeling,
       'needs_chathistory': instance.needsChathistory,
     };
 

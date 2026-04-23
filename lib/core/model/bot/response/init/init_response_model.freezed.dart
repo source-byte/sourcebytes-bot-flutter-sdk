@@ -1084,9 +1084,9 @@ mixin _$BotConfig {
   @JsonKey(name: "avatar_position")
   String? get avatarPosition => throw _privateConstructorUsedError;
   @JsonKey(name: "language")
-  String? get language => throw _privateConstructorUsedError;
-  @JsonKey(name: "is_poweredBy_enabled")
-  bool? get isPoweredByEnabled => throw _privateConstructorUsedError;
+  String? get language => throw _privateConstructorUsedError; // @JsonKey(name: "is_poweredBy_enabled") bool? isPoweredByEnabled,
+  @JsonKey(name: "white_labeling")
+  bool? get whiteLabeling => throw _privateConstructorUsedError;
   @JsonKey(name: "needs_chathistory")
   bool? get needsChathistory => throw _privateConstructorUsedError;
 
@@ -1127,7 +1127,7 @@ abstract class $BotConfigCopyWith<$Res> {
     @JsonKey(name: "authentication_type") String? authenticationType,
     @JsonKey(name: "avatar_position") String? avatarPosition,
     @JsonKey(name: "language") String? language,
-    @JsonKey(name: "is_poweredBy_enabled") bool? isPoweredByEnabled,
+    @JsonKey(name: "white_labeling") bool? whiteLabeling,
     @JsonKey(name: "needs_chathistory") bool? needsChathistory,
   });
 }
@@ -1168,7 +1168,7 @@ class _$BotConfigCopyWithImpl<$Res, $Val extends BotConfig>
     Object? authenticationType = freezed,
     Object? avatarPosition = freezed,
     Object? language = freezed,
-    Object? isPoweredByEnabled = freezed,
+    Object? whiteLabeling = freezed,
     Object? needsChathistory = freezed,
   }) {
     return _then(
@@ -1257,9 +1257,9 @@ class _$BotConfigCopyWithImpl<$Res, $Val extends BotConfig>
                 ? _value.language
                 : language // ignore: cast_nullable_to_non_nullable
                       as String?,
-            isPoweredByEnabled: freezed == isPoweredByEnabled
-                ? _value.isPoweredByEnabled
-                : isPoweredByEnabled // ignore: cast_nullable_to_non_nullable
+            whiteLabeling: freezed == whiteLabeling
+                ? _value.whiteLabeling
+                : whiteLabeling // ignore: cast_nullable_to_non_nullable
                       as bool?,
             needsChathistory: freezed == needsChathistory
                 ? _value.needsChathistory
@@ -1302,7 +1302,7 @@ abstract class _$$BotConfigImplCopyWith<$Res>
     @JsonKey(name: "authentication_type") String? authenticationType,
     @JsonKey(name: "avatar_position") String? avatarPosition,
     @JsonKey(name: "language") String? language,
-    @JsonKey(name: "is_poweredBy_enabled") bool? isPoweredByEnabled,
+    @JsonKey(name: "white_labeling") bool? whiteLabeling,
     @JsonKey(name: "needs_chathistory") bool? needsChathistory,
   });
 }
@@ -1342,7 +1342,7 @@ class __$$BotConfigImplCopyWithImpl<$Res>
     Object? authenticationType = freezed,
     Object? avatarPosition = freezed,
     Object? language = freezed,
-    Object? isPoweredByEnabled = freezed,
+    Object? whiteLabeling = freezed,
     Object? needsChathistory = freezed,
   }) {
     return _then(
@@ -1431,9 +1431,9 @@ class __$$BotConfigImplCopyWithImpl<$Res>
             ? _value.language
             : language // ignore: cast_nullable_to_non_nullable
                   as String?,
-        isPoweredByEnabled: freezed == isPoweredByEnabled
-            ? _value.isPoweredByEnabled
-            : isPoweredByEnabled // ignore: cast_nullable_to_non_nullable
+        whiteLabeling: freezed == whiteLabeling
+            ? _value.whiteLabeling
+            : whiteLabeling // ignore: cast_nullable_to_non_nullable
                   as bool?,
         needsChathistory: freezed == needsChathistory
             ? _value.needsChathistory
@@ -1469,7 +1469,7 @@ class _$BotConfigImpl implements _BotConfig {
     @JsonKey(name: "authentication_type") this.authenticationType,
     @JsonKey(name: "avatar_position") this.avatarPosition,
     @JsonKey(name: "language") this.language,
-    @JsonKey(name: "is_poweredBy_enabled") this.isPoweredByEnabled,
+    @JsonKey(name: "white_labeling") this.whiteLabeling,
     @JsonKey(name: "needs_chathistory") this.needsChathistory,
   }) : _departments = departments;
 
@@ -1547,16 +1547,17 @@ class _$BotConfigImpl implements _BotConfig {
   @override
   @JsonKey(name: "language")
   final String? language;
+  // @JsonKey(name: "is_poweredBy_enabled") bool? isPoweredByEnabled,
   @override
-  @JsonKey(name: "is_poweredBy_enabled")
-  final bool? isPoweredByEnabled;
+  @JsonKey(name: "white_labeling")
+  final bool? whiteLabeling;
   @override
   @JsonKey(name: "needs_chathistory")
   final bool? needsChathistory;
 
   @override
   String toString() {
-    return 'BotConfig(id: $id, bot: $bot, logo: $logo, backgroundColor: $backgroundColor, actionColor: $actionColor, textColor: $textColor, borderRadius: $borderRadius, isBackgroundImageEnabled: $isBackgroundImageEnabled, header: $header, greetingMessage: $greetingMessage, defaultFallbackMessage: $defaultFallbackMessage, buttonLabel: $buttonLabel, buttonMessage: $buttonMessage, widgetShape: $widgetShape, avatarLabel: $avatarLabel, selectedAvatarId: $selectedAvatarId, selectedBackgroundId: $selectedBackgroundId, departments: $departments, authenticationType: $authenticationType, avatarPosition: $avatarPosition, language: $language, isPoweredByEnabled: $isPoweredByEnabled, needsChathistory: $needsChathistory)';
+    return 'BotConfig(id: $id, bot: $bot, logo: $logo, backgroundColor: $backgroundColor, actionColor: $actionColor, textColor: $textColor, borderRadius: $borderRadius, isBackgroundImageEnabled: $isBackgroundImageEnabled, header: $header, greetingMessage: $greetingMessage, defaultFallbackMessage: $defaultFallbackMessage, buttonLabel: $buttonLabel, buttonMessage: $buttonMessage, widgetShape: $widgetShape, avatarLabel: $avatarLabel, selectedAvatarId: $selectedAvatarId, selectedBackgroundId: $selectedBackgroundId, departments: $departments, authenticationType: $authenticationType, avatarPosition: $avatarPosition, language: $language, whiteLabeling: $whiteLabeling, needsChathistory: $needsChathistory)';
   }
 
   @override
@@ -1607,8 +1608,8 @@ class _$BotConfigImpl implements _BotConfig {
                 other.avatarPosition == avatarPosition) &&
             (identical(other.language, language) ||
                 other.language == language) &&
-            (identical(other.isPoweredByEnabled, isPoweredByEnabled) ||
-                other.isPoweredByEnabled == isPoweredByEnabled) &&
+            (identical(other.whiteLabeling, whiteLabeling) ||
+                other.whiteLabeling == whiteLabeling) &&
             (identical(other.needsChathistory, needsChathistory) ||
                 other.needsChathistory == needsChathistory));
   }
@@ -1638,7 +1639,7 @@ class _$BotConfigImpl implements _BotConfig {
     authenticationType,
     avatarPosition,
     language,
-    isPoweredByEnabled,
+    whiteLabeling,
     needsChathistory,
   ]);
 
@@ -1681,7 +1682,7 @@ abstract class _BotConfig implements BotConfig {
     @JsonKey(name: "authentication_type") final String? authenticationType,
     @JsonKey(name: "avatar_position") final String? avatarPosition,
     @JsonKey(name: "language") final String? language,
-    @JsonKey(name: "is_poweredBy_enabled") final bool? isPoweredByEnabled,
+    @JsonKey(name: "white_labeling") final bool? whiteLabeling,
     @JsonKey(name: "needs_chathistory") final bool? needsChathistory,
   }) = _$BotConfigImpl;
 
@@ -1750,10 +1751,10 @@ abstract class _BotConfig implements BotConfig {
   String? get avatarPosition;
   @override
   @JsonKey(name: "language")
-  String? get language;
+  String? get language; // @JsonKey(name: "is_poweredBy_enabled") bool? isPoweredByEnabled,
   @override
-  @JsonKey(name: "is_poweredBy_enabled")
-  bool? get isPoweredByEnabled;
+  @JsonKey(name: "white_labeling")
+  bool? get whiteLabeling;
   @override
   @JsonKey(name: "needs_chathistory")
   bool? get needsChathistory;

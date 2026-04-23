@@ -79,7 +79,8 @@ class BotConfig with _$BotConfig {
     @JsonKey(name: "authentication_type") String? authenticationType,
     @JsonKey(name: "avatar_position") String? avatarPosition,
     @JsonKey(name: "language") String? language,
-    @JsonKey(name: "is_poweredBy_enabled") bool? isPoweredByEnabled,
+    // @JsonKey(name: "is_poweredBy_enabled") bool? isPoweredByEnabled,
+    @JsonKey(name: "white_labeling") bool? whiteLabeling,
     @JsonKey(name: "needs_chathistory") bool? needsChathistory,
   }) = _BotConfig;
 
