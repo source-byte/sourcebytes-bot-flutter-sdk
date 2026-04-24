@@ -12,6 +12,7 @@ part 'init_response_model.g.dart';
 class InitResponseModel with _$InitResponseModel {
   const factory InitResponseModel({
     @JsonKey(name: "bot") Bot? bot,
+    @JsonKey(name: "white_labeling") bool? whiteLabeling,
     @JsonKey(name: "session_id") String? sessionId,
     @JsonKey(name: "user") String? user,
     @JsonKey(name: "bot_config") BotConfig? botConfig,
@@ -80,7 +81,6 @@ class BotConfig with _$BotConfig {
     @JsonKey(name: "avatar_position") String? avatarPosition,
     @JsonKey(name: "language") String? language,
     // @JsonKey(name: "is_poweredBy_enabled") bool? isPoweredByEnabled,
-    @JsonKey(name: "white_labeling") bool? whiteLabeling,
     @JsonKey(name: "needs_chathistory") bool? needsChathistory,
   }) = _BotConfig;
 

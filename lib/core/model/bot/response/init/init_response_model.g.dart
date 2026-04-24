@@ -12,6 +12,7 @@ _$InitResponseModelImpl _$$InitResponseModelImplFromJson(
   bot: json['bot'] == null
       ? null
       : Bot.fromJson(json['bot'] as Map<String, dynamic>),
+  whiteLabeling: json['white_labeling'] as bool?,
   sessionId: json['session_id'] as String?,
   user: json['user'] as String?,
   botConfig: json['bot_config'] == null
@@ -32,6 +33,7 @@ Map<String, dynamic> _$$InitResponseModelImplToJson(
   _$InitResponseModelImpl instance,
 ) => <String, dynamic>{
   'bot': instance.bot,
+  'white_labeling': instance.whiteLabeling,
   'session_id': instance.sessionId,
   'user': instance.user,
   'bot_config': instance.botConfig,
@@ -108,7 +110,6 @@ _$BotConfigImpl _$$BotConfigImplFromJson(Map<String, dynamic> json) =>
       authenticationType: json['authentication_type'] as String?,
       avatarPosition: json['avatar_position'] as String?,
       language: json['language'] as String?,
-      whiteLabeling: json['white_labeling'] as bool?,
       needsChathistory: json['needs_chathistory'] as bool?,
     );
 
@@ -135,7 +136,6 @@ Map<String, dynamic> _$$BotConfigImplToJson(_$BotConfigImpl instance) =>
       'authentication_type': instance.authenticationType,
       'avatar_position': instance.avatarPosition,
       'language': instance.language,
-      'white_labeling': instance.whiteLabeling,
       'needs_chathistory': instance.needsChathistory,
     };
 

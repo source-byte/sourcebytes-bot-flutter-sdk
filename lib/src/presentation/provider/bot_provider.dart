@@ -56,7 +56,7 @@ class BotNotifierProvider extends StateNotifier<BotState> {
   String get bgImage => initResponseModel!.backgroundImage!.image!;
 
   bool get showFooter =>
-      initResponseModel?.botConfig?.whiteLabeling == true ? false : true;
+      initResponseModel?.whiteLabeling == true ? false : true;
 
   String? get logo =>
       initResponseModel?.botConfig?.logo ?? Assets.sourceBytesLogo;
